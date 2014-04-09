@@ -7,11 +7,14 @@ This file creates your application.
 """
 
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+app.config['SECRET_KEY'] = os.environ.get(
+    'SECRET_KEY',
+    'qi2pQ)#RNF<x!t/}Ra30J9g~XO+OW$jPn%4R{P8}3lbU;0|%s>K]_*K|Q(+kQNHS')
+app.jinja_env.add_extension('jinja2.HamlExtension')
 
 
 ###
