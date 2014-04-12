@@ -30,6 +30,18 @@ def home():
 def signup():
     return render_template('signup.haml')
 
+@app.route('/edit_profile')
+def edit_profile():
+    return render_template('edit_profile.haml')
+
+@app.route('/group_panel')
+def group_panel():
+    return render_template('group_panel.haml')
+
+@app.route('/profile_page')
+def profile_page():
+    return render_template('profile_page.haml')
+
 @app.route('/about/')
 def about():
     """Render the website's about page."""
