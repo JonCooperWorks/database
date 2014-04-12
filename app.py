@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get(
     'SECRET_KEY',
     'qi2pQ)#RNF<x!t/}Ra30J9g~XO+OW$jPn%4R{P8}3lbU;0|%s>K]_*K|Q(+kQNHS')
-app.jinja_env.add_extension('jinja2.HamlExtension')
+app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 
 
 ###
@@ -24,8 +24,23 @@ app.jinja_env.add_extension('jinja2.HamlExtension')
 @app.route('/')
 def home():
     """Render website's home page."""
-    return render_template('home.html')
+    return render_template('login.haml')
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.haml')
+
+@app.route('/edit_profile')
+def edit_profile():
+    return render_template('edit_profile.haml')
+
+@app.route('/group_panel')
+def group_panel():
+    return render_template('group_panel.haml')
+
+@app.route('/profile_page')
+def profile_page():
+    return render_template('profile_page.haml')
 
 @app.route('/about/')
 def about():

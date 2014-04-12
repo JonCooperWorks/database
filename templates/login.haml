@@ -1,0 +1,34 @@
+-extends "base.html"
+
+
+-block js 
+
+
+-block main
+  #login
+    .container
+      .row
+        .col-md-4.login-box.well.center
+          %h3.center Login
+
+          -if error
+            .alert.alert-error
+                #{error}
+
+          %form#login-form(action="", method="POST")
+            %input#redirect(type="hidden", name="redirect", \
+                            value="")
+
+            %input#username(type="text", name="username", required="required", \
+                            value="", \
+                            placeholder="Username")
+
+            %input#password(type="password", name="password", \
+                            required="required", placeholder="Password", \
+                            autocomplete="off")
+
+            .button-container.center
+              %button.btn.login(type="submit")
+                %i.icon-lock"
+                &nbsp;
+                Login
