@@ -1,0 +1,90 @@
+-extends "base.html"
+
+
+-block js 
+
+
+-block main
+  #profile_page.container
+    .row
+      .offset3.span6.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          Add friend
+          .control-group
+            %label.control-label(for="friend") Add Friend:
+            .controls
+              %input#friend(type="text", name="friend", required="required", \
+                          value="", placeholder="Email Address")
+              
+            %label.control-label(for="category") Category:
+            .controls
+              %select
+                %option Relative
+                %option School
+                %option Work
+
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Add Friend
+
+    .row
+      .offset3.span6.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          Join Group
+          .control-group
+            %label.control-label(for="group") Join Group:
+            .controls
+              %input#group(type="text", name="group", required="required", \
+                          value="", placeholder="Group Name")
+              
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Join group
+
+    .row
+      .offset3.span6.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          Create Group
+          .control-group
+            %label.control-label(for="cgroup") Create Group:
+            .controls
+              %input#group(type="text", name="cgroup", required="required", \
+                          value="", placeholder="Group Name")
+              
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Create Group
+
+    .row
+      .offset3.span6.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          Post
+          .control-group
+            %label.control-label(for="image") Image:
+            .controls
+              %input#image(type="text", name="image", required="required", \
+                          value="", placeholder="Image")
+
+            %label.control-label(for="text") Text:
+            .controls
+              %input#text(type="text", name="text", required="required", \
+                          value="", placeholder="Text")              
+
+            %label.control-label(for="post_to") Post to:
+            .controls
+              %select(name="post_to")
+                %option Public
+                %option Group
+
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Post 
+

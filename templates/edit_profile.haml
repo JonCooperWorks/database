@@ -1,0 +1,26 @@
+-extends "base.html"
+
+
+-block js 
+
+
+-block main
+  #edit_profile.container
+    .row
+      .offset3.span6.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          Upload Photo
+          .control-group
+            %label.control-label(for="photo") photo:
+            .controls
+              %input#photo(type="text", name="photo", required="required", \
+                          value="")
+
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Upload Photo
+
+
+      
