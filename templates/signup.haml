@@ -7,30 +7,30 @@
 -block main
   #signup.container
     .row
-      .offset3.span6.well
+      .col-md-offset-3.col-md-6.well
         %h2.center
           Sign Up
-        %form.send-message(action="", method="POST")
+        %form.send-message(action="", method="POST", role="form")
 
-          .control-group
-            %label.control-label(for="name") Name:
-            .controls
-              %input#name(type="text", name="name", required="required", \
+          .form-group
+            %label(for="name") Name:
+            %input#name.form-control(type="text", name="name", required="required", \
                           value="")
 
-          .control-group
-            %label.control-label(for="email") E-mail address:
-            .controls
-              %input#email(type="email", name="email", required="required", \
+          .form-group
+            %label(for="dob") Date of birth:
+            %input#dob.form-control(type="date", name="dob", required="required")
+
+          .form-group
+            %label(for="email") E-mail address:
+            %input#email.form-control(type="email", name="email", required="required", \
                            value="")
 
-          .control-group
-            %label.control-label(for="password") Password:
-            .controls
-              %input#password(type="password", name="password", required="required", \
+          .form-group
+            %label(for="password") Password:
+            %input#password.form-control(type="password", name="password", required="required", \
                               autocomplete="off")
 
-          .form-actions.center
+          .center
             %button(type="submit")
-              %i.icon-thumbs-up
               Sign Up

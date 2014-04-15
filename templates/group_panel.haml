@@ -7,17 +7,16 @@
 -block main
   #group_panel.container
     .row
-    .offset3.span6.well
-      %h2.center
-      %form.send-message(action="", method="POST")
-        Add Content Editor
-        .control-group
-          %label.control-label(for="cgroup") Add Content Editor:
-          .controls
-            %input#group(type="text", name="cgroup", required="required", \
-                        value="", placeholder="Email Address")
-            
-        .form-actions.center
-          %button(type="submit")
-            %i.icon-thumbs-up
-            Add Content Editor
+      .col-md-4.well
+        %h2.center
+        %form.send-message(action="", method="POST")
+          .form-group
+            %label.control-label(for="cgroup") Add Content Editor:
+            .controls
+              %input#group(type="text", name="cgroup", required="required", \
+                          value="", placeholder="Email Address")
+              
+          .form-actions.center
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Add Content Editor
