@@ -8,14 +8,14 @@
   #login
     .container
       .row
-        .col-md-4.login-box.well.center
+        .col-md-offset-3.col-md-6.well.login-box
           %h3.center Login
 
           -if error
             .alert.alert-error
                 #{error}
 
-          %form#login-form(action="", method="POST")
+          %form#login-form(action="", method="POST", role="form")
             %input#redirect(type="hidden", name="redirect", \
                             value="")
 
@@ -29,6 +29,4 @@
 
             .button-container.center
               %button.btn.login(type="submit")
-                %i.icon-lock"
-                &nbsp;
                 Login

@@ -7,12 +7,11 @@
 -block main
   #edit_profile.container
     .row
-      .offset3.span6.well
+      .col-md-4.well
         %h2.center
         %form.send-message(action="", method="POST")
-          Upload Photo
-          .control-group
-            %label.control-label(for="photo") photo:
+          .form-group
+            %label.control-label(for="photo") Upload Photo:
             .controls
               %input#photo(type="text", name="photo", required="required", \
                           value="")
@@ -21,6 +20,8 @@
             %button(type="submit")
               %i.icon-thumbs-up
               Upload Photo
-
+    .row
+      .col-md-4.well
+        %h2.center Show user photos here
 
       
