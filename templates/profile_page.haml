@@ -7,84 +7,75 @@
 -block main
   #profile_page.container
     .row
-      .offset3.span6.well
+      .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST")
-          Add friend
-          .control-group
-            %label.control-label(for="friend") Add Friend:
-            .controls
+        %form.send-message(action="", method="POST", role="form")
+          .form-group
+            %label(for="friend") Add Friend:            
               %input#friend(type="text", name="friend", required="required", \
                           value="", placeholder="Email Address")
-              
-            %label.control-label(for="category") Category:
-            .controls
-              %select
+            
+            %label(for="category") Category:
+              %select.form-control
                 %option Relative
                 %option School
                 %option Work
 
-          .form-actions.center
+          .form-actions
             %button(type="submit")
               %i.icon-thumbs-up
               Add Friend
 
-    .row
-      .offset3.span6.well
+
+      .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST")
-          Join Group
-          .control-group
-            %label.control-label(for="group") Join Group:
-            .controls
+        %form.send-message(action="", method="POST", role="form")
+          .form-group
+            %label(for="group") Join Group:            
               %input#group(type="text", name="group", required="required", \
                           value="", placeholder="Group Name")
               
-          .form-actions.center
+          .form-actions
             %button(type="submit")
               %i.icon-thumbs-up
               Join group
 
-    .row
-      .offset3.span6.well
+      .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST")
-          Create Group
-          .control-group
-            %label.control-label(for="cgroup") Create Group:
-            .controls
+        %form.send-message(action="", method="POST", role="form")
+          .form-group
+            %label(for="cgroup") Create Group:           
               %input#group(type="text", name="cgroup", required="required", \
                           value="", placeholder="Group Name")
               
-          .form-actions.center
+          .form-actions
             %button(type="submit")
               %i.icon-thumbs-up
               Create Group
-
     .row
-      .offset3.span6.well
+      .col-md-offset-3.col-md-6.well
         %h2.center
-        %form.send-message(action="", method="POST")
-          Post
-          .control-group
-            %label.control-label(for="image") Image:
-            .controls
+        %form.send-message(action="", method="POST", role="form")
+          .form-group
+            %label(for="image") Image:           
               %input#image(type="text", name="image", required="required", \
                           value="", placeholder="Image")
 
-            %label.control-label(for="text") Text:
-            .controls
+            %label(for="text") Text:            
               %input#text(type="text", name="text", required="required", \
                           value="", placeholder="Text")              
 
-            %label.control-label(for="post_to") Post to:
-            .controls
-              %select(name="post_to")
+            %label(for="post_to") Post to:            
+              %select.form-control(name="post_to")
                 %option Public
                 %option Group
 
-          .form-actions.center
+          .form-actions
             %button(type="submit")
               %i.icon-thumbs-up
               Post 
 
+
+    .row
+      .col-md-12.well
+        %h3 Display posts here

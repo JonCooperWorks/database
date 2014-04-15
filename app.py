@@ -42,6 +42,10 @@ def group_panel():
 def profile_page():
     return render_template('profile_page.haml')
 
+@app.route('/admin')
+def admin_page():
+    return render_template('admin.haml')
+
 @app.route('/about/')
 def about():
     """Render the website's about page."""
