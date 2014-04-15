@@ -1,8 +1,12 @@
+import os
+import urlparse
+
 import oursql
 
-conn = oursql.connect(
-    host='localhost', user='username', passwd='pass', port=3307)
 
+url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+conn = oursql.connect(
+    host=url.hostname, user=url.username, passwd=url.password, port=url.port)
 cursor = conn.cursor(oursql.DictCursor)
 
 
