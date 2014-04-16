@@ -8,8 +8,13 @@ This file creates your application.
 
 import os
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, \
+     escape
+import oursql
 import werkzeug
+
+import db
+from forms import LoginForm
 
 app = Flask(__name__)
 
@@ -23,9 +28,20 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 # Routing for your application.
 ###
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    """Render website's home page."""
+    form = LoginForm(request.form)
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.authenticate(cursor, form.email.data, form.password.data)
+        if user is None:
+            return render_template('login.haml',
+                                   form=form,
+                                   error='Invalid login')
+
+        session['user_id'] = user['user_id']
+        return redirect(url_for('profile_page'))
+
     return render_template('login.haml')
 
 @app.route('/signup')
@@ -42,7 +58,12 @@ def group_panel():
 
 @app.route('/profile_page')
 def profile_page():
-    return render_template('profile_page.haml')
+    if 'user_id' in session:
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.get_user_profile(cursor, escape(session['user_id']))
+        posts = db.get_all_profile_public_posts(cursor, 
+                                                escape(session['user_id']))
+    return render_template('profile_page.haml', user=user, posts=posts)
 
 @app.route('/admin')
 def admin_page():

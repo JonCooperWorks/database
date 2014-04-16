@@ -77,9 +77,9 @@ insert into profile values(7, 'user7@gmail.com', 'path/to/pic7');
 insert into profile values(8, 'user8@gmail.com', 'path/to/pic8');
  
 CREATE TABLE IF NOT EXISTS profile_info(
-  email varchar(200),	
   fname varchar(140),
   lname varchar(140),
+  email varchar(200), 
   dob date,
   PRIMARY KEY(email)
  
@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS friend_of (
  
 insert into friend_of values(1, 2, 'family');
 insert into friend_of values(1, 3, 'work');
+insert into friend_of values(2, 1, 'family');
 insert into friend_of values(2, 4, 'family');
 insert into friend_of values(2, 3, 'work');
 insert into friend_of values(3, 4, 'work');
