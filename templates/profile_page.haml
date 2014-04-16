@@ -10,14 +10,14 @@
     .row
       .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST", role="form")
+        %form.send-message(action="#{url_for('add_friend')}", method="POST", role="form")
           .form-group
             %label(for="friend") Add Friend:            
               %input#friend(type="text", name="friend", required="required", \
                           value="", placeholder="Email Address")
             
             %label(for="category") Category:
-              %select.form-control
+              %select.form-control(name="category")
                 %option Relative
                 %option School
                 %option Work
