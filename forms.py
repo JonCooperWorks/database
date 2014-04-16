@@ -21,3 +21,5 @@ class AddFriendForm(Form):
                                                  ('School','School'),
                                                  ('Work','Work')])
 
+class CreateGroupForm(Form):
+    group_name = TextField(u'Friend', validators=[validators.Required()])

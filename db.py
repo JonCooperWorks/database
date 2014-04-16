@@ -110,6 +110,19 @@ def add_friend(cursor, friend_owner_id, friend_id, category):
                    (friend_owner_id, friend_id, category))
     return True
 
+def create_group(cursor, owner_id, group_name):
+    cursor.execute('CALL create_group(?,?);',
+                   (owner_id, group_name))
+    return True
+
+def user_created_group(cursor,owner_id):
+    cursor.execute('Select * from create_group where create_group.user_id=?;',
+                   (owner_id))
+    user = cursor.fetchone()
+    if user:
+      return True
+    return False
+
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \
                           AND friend = ?', (friend_owner_id, friend_id))
