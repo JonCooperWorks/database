@@ -106,7 +106,7 @@ def get_id_by_email(cursor, email):
       return user
 
 def add_friend(cursor, friend_owner_id, friend_id, category):
-    cursor.execute('INSERT INTO friend_of VALUES (?, ?, ?)',
+    cursor.execute('CALL add_friend(?,?,?);',
                    (friend_owner_id, friend_id, category))
     return True
 

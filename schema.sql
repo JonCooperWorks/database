@@ -212,20 +212,8 @@ insert into create_content values(1,1,1,NOW());
 insert into create_content values(2,2,2,NOW());
 
 DELIMITER $$
-  CREATE PROCEDURE get_id_by_email(IN email varchar(40))
+  CREATE PROCEDURE add_friend(IN friend_owner_id varchar(40), IN friend_id varchar(40))
   BEGIN
-  SELECT user_id 
-  FROM profile 
-  WHERE profile.email = email;
-  END; $$
-DELIMITER ;
-
-DELIMITER $$
-  CREATE PROCEDURE get_group_id_by_email(IN email varchar(40))
-  BEGIN
-  SELECT groups_id 
-  FROM profile JOIN create_group
-  ON profile.user_id = create_group.user_id
-  WHERE profile.email = email;
+  INSERT INTO friend_of VALUES (friend_owner_id, friend_id, category);
   END; $$
 DELIMITER ;

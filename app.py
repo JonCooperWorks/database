@@ -82,7 +82,6 @@ def add_friend():
         db.add_friend(cursor, escape(session['user_id']), friend_id['user_id'],
                       category)
 
-
     return redirect(url_for('profile_page'))
 
 @app.route('/create_reports', methods=['POST'])

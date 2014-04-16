@@ -20,3 +20,4 @@ class AddFriendForm(Form):
     category = SelectField(u'Category', choices=[('Relative','Relative'),
                                                  ('School','School'),
                                                  ('Work','Work')])
+
