@@ -1,0 +1,35 @@
+-extends "base.html"
+
+-block js
+
+-block main
+   .row
+      .col-md-offset-3.col-md-6.well
+        %h2.center
+        %form.send-message(action="", method="POST", role="form")
+          .form-group
+            %label(for="image") Image:           
+              %input#image(type="text", name="image", required="required", \
+                          value="", placeholder="Image")
+
+            %label(for="text") Text:            
+              %input#text(type="text", name="text", required="required", \
+                          value="", placeholder="Text")              
+
+           
+          .form-actions
+            %button(type="submit")
+              %i.icon-thumbs-up
+              Post 
+
+
+    .row
+      .col-md-12
+        -if gposts
+          -for gpost in gposts
+            .well
+              %h3
+                Title: #{gpost.title}
+              %h4
+                Text Body: #{gpost.text_body}
+              Posted by: #{gpost.fname}
