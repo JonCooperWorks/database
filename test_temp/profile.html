@@ -1,0 +1,225 @@
+
+<script type="text/javascript">var jumboHeight = $('.jumbotron').outerHeight();
+function parallax(){
+    var scrolled = $(window).scrollTop();
+    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+}
+
+$(window).scroll(function(e){
+    parallax();
+});</script>
+
+<style type="text/css">
+  .bg {
+  background: url('blossom_background.jpg') no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 350px; /*same height as jumbotron */
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+.jumbotron {
+  height: 350px;
+  color: white;
+  text-shadow: #444 0 1px 1px;
+  background:transparent;
+}
+
+</style>
+
+<!-- ggghg -->
+<nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><!-- <a href="#">Profile</a> --> <a class="navbar-brand" href="#">MyBook</a></li>
+        <li><a href="#">Friends</a></li>
+        <li><a href="#">Groups</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+        </ul>
+    </li>
+</ul>
+<form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="#">Link</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</li>
+</ul>
+</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<!-- dhsfhsdfbhfjs -->
+<!-- <div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+   <ul class="nav">
+  <li class="active">
+    <a class="brand" href="#">MyBook</a>
+  </li>
+  <li><a href="#">Profile</a></li>
+  <li><a href="#">Friends</a></li>
+  <li><a href="#">Groups</a></li>
+
+  <li class="dropdown pull-right">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          Members
+          <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+    <li><a href="#">Login</a></li>
+  <li><a href="#">Sign Up</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+  </div>
+</div> -->
+<script src="twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
+<script src="twitter-bootstrap-v2/docs/assets/js/bootstrap-dropdown.js"></script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<div class="jumbotron">
+  <h1>Person Name</h1>
+  <div class="bs-example">
+    <ul class="media-list">
+        <li class="media">
+            <a href="#" class="pull-left">
+                <img src="blossom_background.jpg" class="media-object" alt="Sample Image" width= "100px" height="100px">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Media Heading</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante.</p>
+
+                <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Post!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+                <!-- Nested media object -->
+                <!-- <div class="media">
+                    <a href="#" class="pull-left">
+                        <img src="../images/avatar-tiny.jpg" class="media-object" alt="Sample Image">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Nested Media Heading</h4>
+                        <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Ut tempus dictum risus. Pellentesque viverra sagittis quam at mattis.</p>
+
+                    </div>
+                </div> -->
+            </div>
+        </li>
+        
+    </ul>
+
+    <hr>
+
+    
+</div>
+</div>
+
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<style type="text/css">
+    .bs-example{
+      margin: 20px;
+    }
+</style>
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="thumbnail">
+                <img src="avatar.jpg" alt="Sample Image">
+                <div class="caption">
+                    <h3>Join Group</h3>
+                    <p>Thumbnail description…</p>
+                    <p><a href="#" class="btn btn-primary">Share</a> <a href="#" class="btn btn-default">Download</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="thumbnail">
+                <img src="avatar.jpg" alt="Sample Image">
+                <div class="caption">
+                    <h3>Create Group</h3>
+                    <p>Thumbnail description…</p>
+                    <p><a href="#" class="btn btn-primary">Share</a> <a href="#" class="btn btn-default">Download</a></p>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>
+
+ <div class=".col-md-6 .col-md-offset-3">
+            <div class="thumbnail">
+                <img src="avatar.jpg" alt="Sample Image">
+                <div class="caption">
+                    <h3>Add Friend</h3>
+                    <p>Thumbnail description…</p>
+                    <p><a href="#" class="btn btn-primary">Share</a> <a href="#" class="btn btn-default">Download</a></p>
+                </div>
+            </div>
+        </div>
+
+<hr>
+
+<div class="container">
+	<div class="row">
+      <div class="col-md-12 text-center"><p>MyBook 2xxx - 2xxx</p></div>
+    </div>
+</div>
