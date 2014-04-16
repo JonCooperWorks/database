@@ -115,7 +115,7 @@ def get_admin_report_gposts(cursor):
 def get_id_by_email(cursor, email):
     cursor.execute(
         'SELECT user_id FROM profile WHERE profile.email = ?;',
-        (email))
+        (email,))
     user = cursor.fetchone()
     if user:
       return user
