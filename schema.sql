@@ -38,14 +38,13 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS groups (
-CREATE TABLE IF NOT EXISTS group (
   group_id integer not null,
   group_name varchar(140),
   PRIMARY KEY(group_id)
 );
 
-insert into group values(1, 'We Love Cats');
-insert into group values(2, 'Gladiators in Suits');
+insert into groups values(1, 'We Love Cats');
+insert into groups values(2, 'Gladiators in Suits');
 
 CREATE TABLE IF NOT EXISTS group_post (
   gpost_id integer not null auto_increment,
@@ -175,7 +174,7 @@ CREATE TABLE IF NOT EXISTS add_to_group (
   date_added date,
   PRIMARY KEY(user_id, group_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
-  FOREIGN KEY(group_id) REFERENCES group(group_id)
+  FOREIGN KEY(group_id) REFERENCES groups(group_id)
 );
 
 insert into add_to_group values(3,1, NOW());
@@ -191,7 +190,7 @@ CREATE TABLE IF NOT EXISTS create_group (
   user_id integer not null,
   date_created date,
   PRIMARY KEY(group_id, user_id),
-  FOREIGN KEY(group_id) REFERENCES group(group_id),
+  FOREIGN KEY(group_id) REFERENCES groups(group_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
@@ -205,7 +204,7 @@ CREATE TABLE IF NOT EXISTS create_content (
   date_created date,
   PRIMARY KEY(user_id, group_id, gpost_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (group_id) REFERENCES group(group_id),
+  FOREIGN KEY (group_id) REFERENCES groups(group_id),
   FOREIGN KEY (gpost_id) REFERENCES group_post(gpost_id)
 );
 
