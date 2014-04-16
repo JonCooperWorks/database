@@ -8,8 +8,12 @@ This file creates your application.
 
 import os
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+import oursql
 import werkzeug
+
+import db
+from forms import LoginForm
 
 app = Flask(__name__)
 
@@ -23,9 +27,20 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 # Routing for your application.
 ###
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    """Render website's home page."""
+    form = LoginForm(request.form)
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.authenticate(cursor, form.email.data, form.password.data)
+        if user is None:
+            return render_template('login.haml',
+                                   form=form,
+                                   error='Invalid login')
+
+        session['email'] = form.email.data
+        return redirect(url_for('profile_page'))
+    print form.errors
     return render_template('login.haml')
 
 @app.route('/signup')

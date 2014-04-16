@@ -5,16 +5,18 @@ import urlparse
 import oursql
 
 
-url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 conn = oursql.connect(
-    host=url.hostname, user='b3a1a2017d486e', passwd='3c5b2de6')
+   host='localhost', user='root', passwd='', db='mybook')
 
 
 def authenticate(cursor, email, password):
-    return cursor.execute(
-        'SELECT * FROM user WHERE email = ? AND password = ? LIMIT 1',
-        (email, password))
-
+    cursor.execute(
+      'SELECT * FROM users JOIN profile ON profile.user_id=users.user_id \
+       WHERE email = ? AND hpassword = ? LIMIT 1',
+      (email, password))
+    user = cursor.fetchone()
+    if user:
+      return user
 
 def get_user_profile(cursor, user_id):
     return cursor.execute(
