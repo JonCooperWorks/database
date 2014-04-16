@@ -1,19 +1,18 @@
 CREATE TABLE IF NOT EXISTS users(
   user_id integer not null auto_increment,
-  reg_id integer not null auto_increment,
   hpassword varchar(40),
-  martial_status varchar(20),
+  marital_status varchar(20),
   PRIMARY KEY(user_id)
 );
 
-insert into users values(1, 1, 'password1', 'Married');
-insert into users values(2, 2, 'password2', 'Married');
-insert into users values(3, 3, 'password3', 'Married');
-insert into users values(4, 4, 'password4', 'Married');
-insert into users values(5, 5, 'password5', 'Single');
-insert into users values(6, 6, 'password6', 'Single');
-insert into users values(7, 7, 'password7', 'Single');
-insert into users values(8, 8, 'password8', 'Single');
+insert into users (hpassword, marital_status) values('password1', 'Married');
+insert into users (hpassword, marital_status) values('password2', 'Married');
+insert into users (hpassword, marital_status) values('password3', 'Married');
+insert into users (hpassword, marital_status) values('password4', 'Married');
+insert into users (hpassword, marital_status) values('password5', 'Single');
+insert into users (hpassword, marital_status) values('password6', 'Single');
+insert into users (hpassword, marital_status) values('password7', 'Single');
+insert into users (hpassword, marital_status) values('password8', 'Single');
 
 CREATE TABLE IF NOT EXISTS post(
   post_id integer not null,
