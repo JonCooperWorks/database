@@ -14,7 +14,7 @@ def signup(cursor,fname, lname, email, password, marital_status, dob):
       'INSERT INTO users (hpassword, marital_status) values(?,?)',
       (password, marital_status))
    cursor.execute(
-     'INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)',
+     'INSERT INTO profile_info values((LAST_INSERT_ID()), ?,?,?,?)',
       (fname, lname, email, dob))
    return True
 

@@ -97,11 +97,10 @@ def group_panel():
 @login_required
 @app.route('/profile_page')
 def profile_page():
-    if 'user_id' in session:
-        cursor = db.conn.cursor(oursql.DictCursor)
-        user = db.get_user_profile(cursor, escape(session['user_id']))
-        posts = db.get_all_profile_public_posts(cursor,
-                                                escape(session['user_id']))
+    cursor = db.conn.cursor(oursql.DictCursor)
+    user = db.get_user_profile(cursor, escape(session.get('user_id')))
+    posts = db.get_all_profile_public_posts(cursor,
+                                            escape(session['user_id']))
     return render_template('profile_page.haml', user=user, posts=posts)
 
 @login_required
