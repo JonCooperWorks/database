@@ -23,7 +23,7 @@ class AddFriendForm(Form):
 class SignupForm(Form):
      fname = TextField(u'Firstname', validators=[validators.Required()])
      lname = TextField(u'Lastname', validators=[validators.Required()])
-     mar_stat = TextField(u'Mar_stat', choices=[('Married', 'Married'),
+     mar_stat = SelectField(u'Mar_stat', choices=[('Married', 'Married'),
                                                        ('Single','Single'),
                                                        ('Divorced', 'Divorced'),
                                                        ('Widowed', 'Widowed')])
