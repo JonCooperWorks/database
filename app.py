@@ -31,6 +31,8 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = LoginForm(request.form)
+    print session
+
     if form.validate():
         cursor = db.conn.cursor(oursql.DictCursor)
         user = db.authenticate(cursor, form.email.data, form.password.data)
@@ -43,6 +45,11 @@ def home():
         return redirect(url_for('profile_page'))
 
     return render_template('login.haml')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home'))
 
 @app.route('/signup')
 def signup():
@@ -78,6 +85,17 @@ def add_friend():
 
 
     return redirect(url_for('profile_page'))
+
+@app.route('/create_reports', methods=['POST'])
+def create_reports():
+    cursor = db.conn.cursor(oursql.DictCursor)
+    report1 = db.get_admin_report_friends(cursor)
+    report2 = db.get_admin_report_comments(cursor)
+    report3 = db.get_admin_report_posts(cursor)
+    report4 = db.get_admin_report_gposts(cursor)
+    return render_template('admin.haml', report1=report1, report2=report2,
+                                         report3=report3, report4=report4)
+
 
 @app.route('/admin')
 def admin_page():

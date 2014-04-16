@@ -8,6 +8,51 @@
   #admin_page.container
     .row
       .col-md-4.well
-        Button to get report of all users and their friends
-        along with their associated posts and comments.
-        %button Button
+        %form#login-form(action="#{url_for('create_reports')}", method="POST", role="form")
+          Button to get report of all users and their friends
+          along with their associated posts and comments.
+          %button.btn(type="submit") Button
+
+    %h3 User friends
+    %table.table
+      %tr
+        %td User id 
+        %td Friends ids
+      -for rows in report1
+        %tr
+          %td #{rows.user_id}
+          %td #{rows.friends}
+
+    %h3 User comments
+    %table.table
+      %tr
+        %td User id 
+        %td Comments
+      -for rows in report2
+        %tr
+          %td #{rows.user_id}
+          %td #{rows.comments}
+
+    %h3 User posts
+    %table.table
+      %tr
+        %td User id 
+        %td Title
+        %td Text
+      -for rows in report3
+        %tr
+          %td #{rows.user_id}
+          %td #{rows.title}
+          %td #{rows.text}
+
+    %h3 User Group Posts
+    %table.table
+      %tr
+        %td User id 
+        %td Title
+        %td Text
+      -for rows in report4
+        %tr
+          %td #{rows.user_id}
+          %td #{rows.title}
+          %td #{rows.text}
