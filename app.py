@@ -29,7 +29,7 @@ def login_required(f):
     @wraps(f)
     def decorated_view(*args, **kwargs):
         user_id = session.get('user_id')
-        if user_id is None or db.get_user_profile(user_id) is None:
+        if user_id is None or db.get_user_profile(db.conn.cursor(oursql.DictCursor), user_id) is None:
             return redirect(url_for('home'))
 
         return f(*args, **kwargs)
