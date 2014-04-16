@@ -20,6 +20,7 @@ class AddFriendForm(Form):
     category = SelectField(u'Category', choices=[('Relative','Relative'),
                                                  ('School','School'),
                                                  ('Work','Work')])
+<<<<<<< HEAD
 class SignupForm(Form):
      fname = TextField(u'Firstname', validators=[validators.Required()])
      lname = TextField(u'Lastname', validators=[validators.Required()])
@@ -30,3 +31,7 @@ class SignupForm(Form):
      email = TextField(u'email', validators=[validators.Required()])
      password = PasswordField(u'Password', validators=[validators.Required()])
      dob = TextField(u'dob', validators=[validators.Required()])
+
+
+class CreateGroupForm(Form):
+    group_name = TextField(u'Friend', validators=[validators.Required()])

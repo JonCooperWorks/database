@@ -58,41 +58,43 @@ CREATE TABLE IF NOT EXISTS group_post (
 insert into group_post values(1, 'Cats are Awesome', 'text','', 'cats <3.');
 insert into group_post values(2, 'A Group Pic', 'img', 'path/to/pic', 'Group pic.');
 
-CREATE TABLE IF NOT EXISTS profile (
+CREATE TABLE IF NOT EXISTS profile_pic (
   user_id integer not null,
-  email varchar(200),
-  profile_pic varchar(140),
+  profile_pic_path varchar(140),
   PRIMARY KEY(user_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
-insert into profile values(1, 'user1@gmail.com', 'path/to/pic1');
-insert into profile values(2, 'user2@gmail.com', 'path/to/pic2');
-insert into profile values(3, 'user3@gmail.com', 'path/to/pic3');
-insert into profile values(4, 'user4@gmail.com', 'path/to/pic4');
-insert into profile values(5, 'user5@gmail.com', 'path/to/pic5');
-insert into profile values(6, 'user6@gmail.com', 'path/to/pic6');
-insert into profile values(7, 'user7@gmail.com', 'path/to/pic7');
-insert into profile values(8, 'user8@gmail.com', 'path/to/pic8');
+insert into profile_pic values(1, 'path/to/pic1');
+insert into profile_pic values(2, 'path/to/pic2');
+insert into profile_pic values(3, 'path/to/pic3');
+insert into profile_pic values(4, 'path/to/pic4');
+insert into profile_pic values(5, 'path/to/pic5');
+insert into profile_pic values(6, 'path/to/pic6');
+insert into profile_pic values(7, 'path/to/pic7');
+insert into profile_pic values(8, 'path/to/pic8');
 
 CREATE TABLE IF NOT EXISTS profile_info(
+  user_id integer not null,
   fname varchar(140),
   lname varchar(140),
   email varchar(200),
   dob date,
-  PRIMARY KEY(email)
+  PRIMARY KEY(user_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+  
 );
 
-/* FOREIGN KEY (email) REFERENCES profile(email) */
 
-insert into profile_info values('Bea', 'Breanne', 'user1@gmail.com', '1981-01-01');
-insert into profile_info values('Kerry', 'Daniel', 'user2@gmail.com', '1982-02-02');
-insert into profile_info values('Darryl', 'Shayne', 'user3@gmail.com', '1983-03-03');
-insert into profile_info values('Finnegan', 'Makenna', 'user4@gmail.com', '1984-04-04');
-insert into profile_info values('Annalee', 'Abby', 'user5@gmail.com', '1985-05-05');
-insert into profile_info values('Emmanuel', 'Purdie', 'user6@gmail.com', '1986-06-06');
-insert into profile_info values('Davinia', 'Lauren', 'user7@gmail.com', '1987-07-07');
-insert into profile_info values('Shawnda', 'Laryn', 'user8@gmail.com', '1988-08-08');
+
+insert into profile_info values(1,'Bea', 'Breanne', 'user1@gmail.com', '1981-01-01');
+insert into profile_info values(2,'Kerry', 'Daniel', 'user2@gmail.com', '1982-02-02');
+insert into profile_info values(3,'Darryl', 'Shayne', 'user3@gmail.com', '1983-03-03');
+insert into profile_info values(4,'Finnegan', 'Makenna', 'user4@gmail.com', '1984-04-04');
+insert into profile_info values(5,'Annalee', 'Abby', 'user5@gmail.com', '1985-05-05');
+insert into profile_info values(6,'Emmanuel', 'Purdie', 'user6@gmail.com', '1986-06-06');
+insert into profile_info values(7,'Davinia', 'Lauren', 'user7@gmail.com', '1987-07-07');
+insert into profile_info values(8,'Shawnda', 'Laryn', 'user8@gmail.com', '1988-08-08');
 
 CREATE TABLE IF NOT EXISTS mood (
 	user_id integer not null,
@@ -190,8 +192,8 @@ CREATE TABLE IF NOT EXISTS create_group (
   user_id integer not null,
   date_created date,
   PRIMARY KEY(group_id, user_id),
-  FOREIGN KEY(group_id) REFERENCES groups(group_id),
-  FOREIGN KEY(user_id) REFERENCES users(user_id)
+  FOREIGN KEY(group_id) REFERENCES groups(group_id) ON UPDATE CASCADE,
+  FOREIGN KEY(user_id) REFERENCES users(user_id) ON UPDATE CASCADE
 );
 
 insert into create_group values(1,1, NOW());
@@ -210,3 +212,22 @@ CREATE TABLE IF NOT EXISTS create_content (
 
 insert into create_content values(1,1,1,NOW());
 insert into create_content values(2,2,2,NOW());
+
+DELIMITER $$
+  CREATE PROCEDURE add_friend(IN friend_owner_id varchar(40), IN friend_id varchar(40))
+  BEGIN
+  INSERT INTO friend_of VALUES (friend_owner_id, friend_id, category);
+  END; $$
+DELIMITER ;
+
+DELIMITER $$
+  CREATE PROCEDURE create_group(IN owner_id varchar(40), IN group_name varchar(40))
+  BEGIN
+  START TRANSACTION;
+    INSERT INTO groups (group_id, group_name) 
+      values(owner_id, group_name);
+    INSERT INTO create_group (group_id, user_id, date_created) 
+      values(owner_id, owner_id, NOW());
+  COMMIT;
+  END; $$
+DELIMITER ;

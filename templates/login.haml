@@ -15,7 +15,7 @@
             .alert.alert-error
                 #{error}
 
-          %form#login-form(action="#{url_for('home')}", method="POST", role="form")
+          %form#login-form(action="#{url_for('login')}", method="POST", role="form")
             %input#redirect(type="hidden", name="redirect", \
                             value="")
 

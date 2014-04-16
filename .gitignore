@@ -37,3 +37,4 @@ pip-log.txt
 uploads/*.png
 uploads/*.jpg
 uploads/*.gif
+templates/test/test_photo.html
