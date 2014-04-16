@@ -1,4 +1,5 @@
 import os
+import re
 import urlparse
 
 import oursql
@@ -86,4 +87,4 @@ def add_friend(friend_owner_id, friend_id, category):
 
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \
-                          AND friend = ?, (friend_owner_id, friend_id))
+                          AND friend = ?', (friend_owner_id, friend_id))
