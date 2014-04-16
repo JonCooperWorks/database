@@ -212,3 +212,22 @@ CREATE TABLE IF NOT EXISTS create_content (
  
 insert into create_content values(1,1,1,NOW());
 insert into create_content values(2,2,2,NOW());
+
+DELIMITER $$
+  CREATE PROCEDURE get_id_by_email(IN email varchar(40))
+  BEGIN
+  SELECT user_id 
+  FROM profile 
+  WHERE profile.email = email;
+  END; $$
+DELIMITER ;
+
+DELIMITER $$
+  CREATE PROCEDURE get_group_id_by_email(IN email varchar(40))
+  BEGIN
+  SELECT groups_id 
+  FROM profile JOIN create_group
+  ON profile.user_id = create_group.user_id
+  WHERE profile.email = email;
+  END; $$
+DELIMITER ;
