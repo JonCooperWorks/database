@@ -38,7 +38,7 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS group (
-  group_id integer not null,
+  group_id integer not null auto_increment,
   group_name varchar(140),
   PRIMARY KEY(group_id)
 );
@@ -200,7 +200,7 @@ insert into create_group values(2,2, NOW());
 
 CREATE TABLE IF NOT EXISTS create_content (
   user_id integer not null,
-  group_id integer not null,
+  groups_id integer not null,
   gpost_id integer not null,
   date_created date,
   PRIMARY KEY(user_id, group_id, gpost_id),
