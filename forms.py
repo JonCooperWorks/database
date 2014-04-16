@@ -23,3 +23,9 @@ class AddFriendForm(Form):
 
 class CreateGroupForm(Form):
     group_name = TextField(u'Friend', validators=[validators.Required()])
+
+class AddContentEditor(Form):
+    email = TextField(u'Email', validators=[validators.Required()])
+
+class AddGroupMember(Form):
+    email = TextField(u'Email', validators=[validators.Required()])

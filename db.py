@@ -106,6 +106,22 @@ def get_id_by_email(cursor, email):
     if user:
       return user
 
+def add_content_editor(cursor, user_id, email):
+    from datetime import date
+    user_added = get_id_by_email(cursor,email)
+    user_added = user_added['user_id']
+    cursor.execute('INSERT INTO add_editors_group VALUES (?,?,?);',
+      (user_id, user_added, str(date.today())))
+    return True
+
+def add_group_member(cursor, user_id,email):
+    from datetime import date
+    user_added = get_id_by_email(cursor,email)
+    user_added = user_added['user_id']
+    cursor.execute('INSERT INTO add_editors_group VALUES (?,?,?);',
+      (user_id, user_added, str(date.today())))
+    return True
+
 def add_friend(cursor, friend_owner_id, friend_id, category):
     cursor.execute('CALL add_friend(?,?,?);',
                    (friend_owner_id, friend_id, category))
