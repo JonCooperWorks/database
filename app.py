@@ -39,8 +39,7 @@ def home():
                                    error='Invalid login')
 
         session['email'] = form.email.data
-        return redirect(url_for('profile_page'))
-    print form.errors
+        return render_template('profile_page.haml', user=user)
     return render_template('login.haml')
 
 @app.route('/signup')
