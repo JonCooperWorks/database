@@ -52,7 +52,17 @@ def logout():
 
 @app.route('/signup')
 def signup():
+    form = SignupForm(request.form)
+
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.signup(cursor, form.fname, form.lname, form.mar_stat,
+                         form.email, form.password)
+
+        return redirect(url_for('login'))
+
     return render_template('signup.haml')
+
 
 @app.route('/edit_profile')
 def edit_profile():
