@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS profile_info(
   email varchar(200),
   dob date,
   PRIMARY KEY(email)
+
 );
 
 /* FOREIGN KEY (email) REFERENCES profile(email) */
