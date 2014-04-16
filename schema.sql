@@ -15,7 +15,7 @@ insert into users (hpassword, marital_status) values('password7', 'Single');
 insert into users (hpassword, marital_status) values('password8', 'Single');
 
 CREATE TABLE IF NOT EXISTS post(
-  post_id integer not null,
+  post_id integer not null auto_increment,
   title varchar(140),
   post_type varchar(140),
   image_path varchar(140),
@@ -38,7 +38,7 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS group (
-  group_id integer not null,
+  group_id integer not null auto_increment,
   group_name varchar(140),
   PRIMARY KEY(group_id)
 );
@@ -96,10 +96,10 @@ insert into profile_info values('Davinia', 'Lauren', 'user7@gmail.com', '1987-07
 insert into profile_info values('Shawnda', 'Laryn', 'user8@gmail.com', '1988-08-08');
 
 CREATE TABLE IF NOT EXISTS mood (
-	user_id integer not null,
-	user_mood varchar(40),
-	PRIMARY KEY (user_id),
-	FOREIGN KEY (user_id) REFERENCES users(user_id)
+  user_id integer not null,
+  user_mood varchar(40),
+  PRIMARY KEY (user_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 insert into mood values(1, 'happy');
