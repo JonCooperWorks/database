@@ -15,7 +15,7 @@ insert into users (hpassword, marital_status) values('password7', 'Single');
 insert into users (hpassword, marital_status) values('password8', 'Single');
 
 CREATE TABLE IF NOT EXISTS post(
-  post_id integer not null,
+  post_id integer not null auto_increment,
   title varchar(140),
   post_type varchar(140),
   image_path varchar(140),
@@ -29,7 +29,7 @@ insert into post values(2, 'A Picture', 'img','2', 'Pretty picture.' );
 
 
 CREATE TABLE IF NOT EXISTS comments (
-  comment_id integer not null,
+  comment_id integer not null auto_increment,
   content varchar(140),
   PRIMARY KEY(comment_id)
 );
@@ -38,16 +38,16 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS groups (
-  groups_id integer not null,
+  groups_id integer not null auto_increment,
   group_name varchar(140),
-  PRIMARY KEY(groups_id)
+  PRIMARY KEY(	groups_id)
 );
 
 insert into groups values(1, 'We Love Cats');
 insert into groups values(2, 'Gladiators in Suits');
 
 CREATE TABLE IF NOT EXISTS group_post (
-  gpost_id integer not null,
+  gpost_id integer not null auto_increment,
   title varchar(140),
   gpost_type varchar(140),
   g_image_path varchar(140),
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS profile (
   email varchar(200),
   profile_pic varchar(140),
   PRIMARY KEY(user_id),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 insert into profile values(1, 'user1@gmail.com', 'path/to/pic1');
@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS profile_info(
   email varchar(200),
   dob date,
   PRIMARY KEY(email)
-
 );
 
 /* FOREIGN KEY (email) REFERENCES profile(email) */
@@ -127,7 +126,7 @@ CREATE TABLE IF NOT EXISTS comments_on (
   post_id integer not null,
   user_id integer not null,
   comment_id integer not null,
-  date_created date,
+  date_commented date,
   PRIMARY KEY(post_id, user_id, comment_id),
   FOREIGN KEY (post_id) REFERENCES post(post_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -157,7 +156,7 @@ insert into friend_of values(3, 8, 'family');
 CREATE TABLE IF NOT EXISTS add_editors_group (
   group_owner integer not null,
   user_added integer not null,
-  date_created date,
+  date_added date,
   PRIMARY KEY(group_owner, user_added),
   FOREIGN KEY(group_owner) REFERENCES users(user_id),
   FOREIGN KEY(user_added) REFERENCES users(user_id)
