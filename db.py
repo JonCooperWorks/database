@@ -86,9 +86,17 @@ def get_admin_report_gposts():
             GROUP BY users.user_id;' 
            )
 
-def add_friend(friend_owner_id, friend_id, category):
-    return cursor.execute('INSERT INTO friend_of VALUES (?, ?, ?)',
-                          (friend_owner_id, friend_id, category))
+def get_id_by_email(cursor, email):
+    query = 'SELECT user_id FROM profile WHERE profile.email = \'%s\';' % email
+    cursor.execute(query)
+    user = cursor.fetchone()
+    if user:
+      return user
+
+def add_friend(cursor, friend_owner_id, friend_id, category):
+    cursor.execute('INSERT INTO friend_of VALUES (?, ?, ?)',
+                   (friend_owner_id, friend_id, category))
+    return True
 
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \

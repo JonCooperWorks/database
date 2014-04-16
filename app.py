@@ -14,7 +14,7 @@ import oursql
 import werkzeug
 
 import db
-from forms import LoginForm
+from forms import LoginForm, AddFriendForm
 
 app = Flask(__name__)
 
@@ -64,6 +64,20 @@ def profile_page():
         posts = db.get_all_profile_public_posts(cursor, 
                                                 escape(session['user_id']))
     return render_template('profile_page.haml', user=user, posts=posts)
+
+@app.route('/add_friend', methods=['POST'])
+def add_friend():
+    form = AddFriendForm(request.form)
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        email = form.friend.data
+        category = form.category.data
+        friend_id = db.get_id_by_email(cursor, email)
+        db.add_friend(cursor, escape(session['user_id']), friend_id['user_id'],
+                      category)
+
+
+    return redirect(url_for('profile_page'))
 
 @app.route('/admin')
 def admin_page():
