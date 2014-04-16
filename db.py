@@ -171,3 +171,19 @@ def get_all_profile_public_posts(cursor, user_id):
     if posts:
       print posts
       return posts
+
+def get_all_group_posts(cursor, group_id):
+    cursor.execute(
+       'SELECT  title, text_body, fname \
+        FROM users JOIN create_content \
+        ON create_content.user_id = users.user_id \
+        JOIN group_post \
+        ON group_post.gpost_id = create_content.post_id \
+        JOIN profile_info AS p1 \
+        ON p1.user_id = users.user_id \
+        WHERE create_content.group_id = ? ',(group_id)
+
+    posts = cursor.fetchall()
+    if posts:
+      print posts
+      return posts
