@@ -12,3 +12,13 @@ INSERT INTO add_editors_group (group_owner,user_added) values(?,?)
 INSERT INTO users (hpassword, martial_status) values(?,?),
 INSERT INTO profile (user_id, email) values(LAST(users.user_id), ?),
 INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)
+
+-- create img post
+
+INSERT INTO post (title,post_type,image_path,text_body) values (?,?,?,?),
+INSERT INTO creates_post (post_id,user_id, date_created) values (LAST(post.post_id),?,NOW());
+
+-- create text post
+
+INSERT INTO post (title,post_type,text_body) values (?,?,?),
+INSERT INTO creates_post (post_id,user_id, date_created) values (LAST(post.post_id),?,NOW());;
