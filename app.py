@@ -28,7 +28,8 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 def login_required(f):
     @wraps(f)
     def decorated_view(*args, **kwargs):
-        if session.get('user_id') is None:
+        user_id = session.get('user_id')
+        if user_id is None or db.get_user_profile(user_id) is None:
             return redirect(url_for('home'))
 
         return f(*args, **kwargs)
