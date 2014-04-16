@@ -11,6 +11,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 import werkzeug
 
+import db
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get(
@@ -59,7 +61,9 @@ def upload_file():
     file = request.files['file']
     if file:
         filename = werkzeug.secure_filename(file.filename)
-        file.save(os.path.join(os.path.join(os.getcwd(), 'uploads'), filename))
+        path = os.path.join(os.path.join(os.getcwd(), 'uploads'), filename)
+        file.save(path)
+        db.save_uploaded_image(db.conn.cursor(), path, 1)
         return redirect(url_for('profile_page', filename=filename))
 
     return 500
