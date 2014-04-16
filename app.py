@@ -15,7 +15,7 @@ import oursql
 import werkzeug
 
 import db
-from forms import LoginForm, AddFriendForm, CreateGroupForm
+from forms import LoginForm, AddFriendForm, SignupForm, CreateGroupForm
 
 app = Flask(__name__)
 
@@ -69,8 +69,18 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    form = SignupForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.signup(cursor, form.fname.data, form.lname.data,
+                         form.email.data, form.password.data,
+                         form.mar_stat.data, form.dob.data)
+
+        return redirect(url_for('login'))
+
     return render_template('signup.haml')
 
 
