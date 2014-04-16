@@ -21,7 +21,7 @@ def authenticate(cursor, email, password):
 def get_user_profile(cursor, user_id):
     cursor.execute(
         'SELECT * FROM profile WHERE profile.user_id = ?',
-        (user_id))
+        (user_id,))
     user = cursor.fetchone()
     if user:
       return user
@@ -101,7 +101,7 @@ def get_admin_report_gposts(cursor):
 def get_id_by_email(cursor, email):
     cursor.execute(
         'SELECT user_id FROM profile WHERE profile.email = ?;',
-        (email))
+        (email,))
     user = cursor.fetchone()
     if user:
       return user
