@@ -43,7 +43,7 @@ def exec_sql_file(cursor, sql_file):
             #print "\n\n[DEBUG] Executing SQL statement:\n%s" % (statement)
             try:
                 cursor.execute(statement)
-            except (OperationalError, ProgrammingError) as e:
+            except (oursql.OperationalError, oursql.ProgrammingError) as e:
                 print "\n[WARN] MySQLError during execute statement \n\tArgs: '%s'" % (str(e.args))
 
             statement = ""
