@@ -200,7 +200,7 @@ insert into create_group values(2,2, NOW());
 
 CREATE TABLE IF NOT EXISTS create_content (
   user_id integer not null,
-  groups_id integer not null,
+  group_id integer not null,
   gpost_id integer not null,
   date_created date,
   PRIMARY KEY(user_id, group_id, gpost_id),
