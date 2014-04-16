@@ -95,10 +95,10 @@ insert into profile_info values('Davinia', 'Lauren', 'user7@gmail.com', '1987-07
 insert into profile_info values('Shawnda', 'Laryn', 'user8@gmail.com', '1988-08-08');
 
 CREATE TABLE IF NOT EXISTS mood (
-	user_id integer not null,
-	user_mood varchar(40),
-	PRIMARY KEY (user_id),
-	FOREIGN KEY (user_id) REFERENCES users(user_id)
+  user_id integer not null,
+  user_mood varchar(40),
+  PRIMARY KEY (user_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 insert into mood values(1, 'happy');
