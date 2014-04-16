@@ -43,10 +43,10 @@
 
       .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST", role="form")
+        %form.send-message(action="#{url_for('create_group')}", method="POST", role="form")
           .form-group
-            %label(for="cgroup") Create Group:           
-              %input#group(type="text", name="cgroup", required="required", \
+            %label(for="group_name") Create Group:           
+              %input#group(type="text", name="group_name", required="required", \
                           value="", placeholder="Group Name")
               
           .form-actions

@@ -15,7 +15,7 @@ import oursql
 import werkzeug
 
 import db
-from forms import LoginForm, AddFriendForm
+from forms import LoginForm, AddFriendForm, CreateGroupForm
 
 app = Flask(__name__)
 
@@ -106,7 +106,6 @@ def add_friend():
         db.add_friend(cursor, escape(session['user_id']), friend_id['user_id'],
                       category)
 
-
     return redirect(url_for('profile_page'))
 
 @app.route('/create_reports', methods=['POST'])
@@ -119,6 +118,17 @@ def create_reports():
     return render_template('admin.haml', report1=report1, report2=report2,
                                          report3=report3, report4=report4)
 
+@app.route('/create_group', methods=['POST'])
+def create_group():
+    form = CreateGroupForm(request.form)
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        group_name = form.group_name.data
+        if db.user_created_group(cursor, escape(session['user_id'])):
+            return redirect(url_for('profile_page'))
+        db.create_group(cursor, escape(session['user_id']), group_name)
+
+    return redirect(url_for('profile_page'))
 
 @app.route('/admin')
 def admin_page():

@@ -21,7 +21,7 @@ def authenticate(cursor, email, password):
 def get_user_profile(cursor, user_id):
     cursor.execute(
         'SELECT * FROM profile WHERE profile.user_id = ?',
-        (user_id, ))
+        (user_id))
     user = cursor.fetchone()
     if user:
       return user
@@ -101,21 +101,28 @@ def get_admin_report_gposts(cursor):
 def get_id_by_email(cursor, email):
     cursor.execute(
         'SELECT user_id FROM profile WHERE profile.email = ?;',
-        (email, ))
+        (email))
     user = cursor.fetchone()
     if user:
       return user
 
 def add_friend(cursor, friend_owner_id, friend_id, category):
-    try :
-        cursor.execute('INSERT INTO friend_of VALUES (?, ?, ?)',
-                       (friend_owner_id, friend_id, category))
+    cursor.execute('CALL add_friend(?,?,?);',
+                   (friend_owner_id, friend_id, category))
+    return True
 
-    except oursql.IntegrityError:
-        return False
+def create_group(cursor, owner_id, group_name):
+    cursor.execute('CALL create_group(?,?);',
+                   (owner_id, group_name))
+    return True
 
-    else:
-        return True
+def user_created_group(cursor,owner_id):
+    cursor.execute('Select * from create_group where create_group.user_id=?;',
+                   (owner_id))
+    user = cursor.fetchone()
+    if user:
+      return True
+    return False
 
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \

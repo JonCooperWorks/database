@@ -20,3 +20,6 @@ class AddFriendForm(Form):
     category = SelectField(u'Category', choices=[('Relative','Relative'),
                                                  ('School','School'),
                                                  ('Work','Work')])
+
+class CreateGroupForm(Form):
+    group_name = TextField(u'Friend', validators=[validators.Required()])
