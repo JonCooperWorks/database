@@ -38,13 +38,14 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS groups (
-  groups_id integer not null auto_increment,
+CREATE TABLE IF NOT EXISTS group (
+  group_id integer not null,
   group_name varchar(140),
-  PRIMARY KEY(	groups_id)
+  PRIMARY KEY(group_id)
 );
 
-insert into groups values(1, 'We Love Cats');
-insert into groups values(2, 'Gladiators in Suits');
+insert into group values(1, 'We Love Cats');
+insert into group values(2, 'Gladiators in Suits');
 
 CREATE TABLE IF NOT EXISTS group_post (
   gpost_id integer not null auto_increment,
@@ -170,11 +171,11 @@ insert into add_editors_group values(7,5,NOW());
 
 CREATE TABLE IF NOT EXISTS add_to_group (
   user_id integer not null,
-  groups_id integer not null,
+  group_id integer not null,
   date_added date,
-  PRIMARY KEY(user_id, groups_id),
+  PRIMARY KEY(user_id, group_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
-  FOREIGN KEY(groups_id) REFERENCES groups(groups_id)
+  FOREIGN KEY(group_id) REFERENCES group(group_id)
 );
 
 insert into add_to_group values(3,1, NOW());
@@ -186,11 +187,11 @@ insert into add_to_group values(2,2, NOW());
 insert into add_to_group values(7,2, NOW());
 
 CREATE TABLE IF NOT EXISTS create_group (
-  groups_id integer not null,
+  group_id integer not null,
   user_id integer not null,
   date_created date,
-  PRIMARY KEY(groups_id, user_id),
-  FOREIGN KEY(groups_id) REFERENCES groups(groups_id),
+  PRIMARY KEY(group_id, user_id),
+  FOREIGN KEY(group_id) REFERENCES group(group_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
@@ -199,12 +200,12 @@ insert into create_group values(2,2, NOW());
 
 CREATE TABLE IF NOT EXISTS create_content (
   user_id integer not null,
-  groups_id integer not null,
+  group_id integer not null,
   gpost_id integer not null,
   date_created date,
-  PRIMARY KEY(user_id, groups_id, gpost_id),
+  PRIMARY KEY(user_id, group_id, gpost_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (groups_id) REFERENCES groups(groups_id),
+  FOREIGN KEY (group_id) REFERENCES group(group_id),
   FOREIGN KEY (gpost_id) REFERENCES group_post(gpost_id)
 );
 
