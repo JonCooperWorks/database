@@ -9,11 +9,11 @@
     .row
       .col-md-4.well
         %h2.center
-        %form.send-message(action="", method="POST")
+        %form.send-message(action="#{url_for('add_content_editor')}", method="POST")
           .form-group
-            %label.control-label(for="cgroup") Add Content Editor:
+            %label.control-label(for="email") Add Content Editor:
             .controls
-              %input#group(type="text", name="cgroup", required="required", \
+              %input#email(type="text", name="email", required="required", \
                           value="", placeholder="Email Address")
               
           .form-actions.center

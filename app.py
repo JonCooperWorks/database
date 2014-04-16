@@ -15,7 +15,8 @@ import oursql
 import werkzeug
 
 import db
-from forms import LoginForm, AddFriendForm, SignupForm, CreateGroupForm
+from forms import LoginForm, AddFriendForm, CreateGroupForm,  AddContentEditor, \
+         JoinGroup
 
 app = Flask(__name__)
 
@@ -137,6 +138,27 @@ def create_group():
             return redirect(url_for('profile_page'))
         db.create_group(cursor, escape(session['user_id']), group_name)
 
+    return redirect(url_for('profile_page'))
+
+@app.route('/add_content_editor', methods=['POST'])
+def add_content_editor():
+    form = AddContentEditor(request.form)
+    if form.validate():
+
+        cursor = db.conn.cursor(oursql.DictCursor)
+        email = form.email.data
+        db.add_content_editor(cursor, escape(session['user_id']), email)
+    print form.errors
+    return redirect(url_for('group_panel'))
+
+@app.route('/join_group', methods=['POST'])
+def join_group():
+    form = JoinGroup(request.form)
+    if form.validate():
+        cursor = db.conn.cursor(oursql.DictCursor)
+        group_name = form.group_name.data
+        db.join_group(cursor, escape(session['user_id']), group_name)
+    
     return redirect(url_for('profile_page'))
 
 @app.route('/admin')

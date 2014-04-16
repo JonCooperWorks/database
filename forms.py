@@ -34,3 +34,9 @@ class SignupForm(Form):
 
 class CreateGroupForm(Form):
     group_name = TextField(u'Friend', validators=[validators.Required()])
+
+class AddContentEditor(Form):
+    email = TextField(u'Email', validators=[validators.Required()])
+
+class JoinGroup(Form):
+    group_name = TextField(u'Group_name', validators=[validators.Required()])
