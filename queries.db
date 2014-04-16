@@ -1,0 +1,14 @@
+-- edit_profile.haml
+
+SELECT profile_pic FROM profile WHERE user_id =?
+
+-- group_panel.haml
+
+INSERT INTO add_editors_group (group_owner,user_added) values(?,?)
+
+-- signup.haml. profile_info needs to be linked to something. Your call what.
+--              Either users.user_id OR profile.user_id.
+
+INSERT INTO users (hpassword, martial_status) values(?,?),
+INSERT INTO profile (user_id, email) values(LAST(users.user_id), ?),
+INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)
