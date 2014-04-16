@@ -32,7 +32,7 @@ def populate(cursor):
 def exec_sql_file(cursor, sql_file):
     print "\n[INFO] Executing SQL script file: '%s'" % (sql_file)
     statement = ""
- 
+
     for line in open(sql_file):
         if re.match(r'--', line):  # ignore sql comment lines
             continue
@@ -45,7 +45,7 @@ def exec_sql_file(cursor, sql_file):
                 cursor.execute(statement)
             except (OperationalError, ProgrammingError) as e:
                 print "\n[WARN] MySQLError during execute statement \n\tArgs: '%s'" % (str(e.args))
- 
+
             statement = ""
 
 def get_admin_report_friends(cursor):
@@ -92,7 +92,7 @@ def get_admin_report_gposts(cursor):
             ON create_content.user_id = users.user_id \
             LEFT OUTER JOIN group_post \
             ON group_post.gpost_id = create_content.gpost_id \
-            GROUP BY users.user_id;' 
+            GROUP BY users.user_id;'
            )
     report = cursor.fetchall()
     if report:
