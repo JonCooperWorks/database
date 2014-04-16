@@ -9,6 +9,15 @@ conn = oursql.connect(
    host='localhost', user='root', passwd='', db='mybook')
 
 
+def signup(cursor,fname, lname, email, password, marital_status, dob):
+   cursor.execute(
+      'INSERT INTO users (hpassword, martial_status) values(?,?),',
+      (password, marital_status)
+      
+     'INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)'
+      (fname, lname, email, dob))
+   return True
+
 def authenticate(cursor, email, password):
     cursor.execute(
       'SELECT * FROM users JOIN profile ON profile.user_id=users.user_id \
@@ -20,11 +29,16 @@ def authenticate(cursor, email, password):
 
 def get_user_profile(cursor, user_id):
     cursor.execute(
-        'SELECT * FROM profile WHERE profile.user_id = ?',
+        'SELECT * FROM profile_info WHERE profile.user_id = ?',
         (user_id))
     user = cursor.fetchone()
     if user:
       return user
+
+def get_user_proifle_pic(cursor,user_id):
+   cursor.execute('SELECT profile_pic_path FROM profile_pic WHERE user_id =?',
+                  (user_id))
+   return True
 
 def populate(cursor):
     return exec_sql_file(cursor, 'schema.sql')
@@ -113,6 +127,11 @@ def add_friend(cursor, friend_owner_id, friend_id, category):
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \
                           AND friend = ?', (friend_owner_id, friend_id))
+
+def add_editor_group(cursor, group_owner, user_added):
+   cursor.execute('INSERT INTO add_editors_group (group_owner,user_added) values(?,?, NOW())',
+                  (group_owner, user_added))
+   return True
 
 def get_all_profile_public_posts(cursor, user_id):
     cursor.execute(
