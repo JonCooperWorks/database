@@ -13,10 +13,17 @@
         %form.send-message(action="", method="POST", role="form")
 
           .form-group
-            %label(for="name") Name:
-            %input#name.form-control(type="text", name="name", required="required", \
+            %label(for="name") First Name:
+            %input#name.form-control(type="text", name="fname", required="required", \
                           value="")
-
+                          
+                          
+          .form-group
+            %label(for="name") Last Name:
+            %input#name.form-control(type="text", name="lname", required="required", \
+                          value="")
+          
+          
           .form-group
             %label(for="name") Maritial Status:
             %input#name.form-control(type="text", name="mar_stat", required="required", \
