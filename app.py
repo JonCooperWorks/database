@@ -40,8 +40,14 @@ def login_required(f):
 # Routing for your application.
 ###
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/')
+@login_required
 def home():
+    return profile_page()
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     form = LoginForm(request.form)
 
     if form.validate():
