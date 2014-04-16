@@ -32,3 +32,8 @@ pip-log.txt
 *.[oa]
 *.py[co]
 *.rbc
+
+*.swp
+uploads/*.png
+uploads/*.jpg
+uploads/*.gif
