@@ -31,7 +31,6 @@ app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = LoginForm(request.form)
-    print session
 
     if form.validate():
         cursor = db.conn.cursor(oursql.DictCursor)
