@@ -11,16 +11,16 @@ conn = oursql.connect(
 
 def signup(cursor,fname, lname, email, password, marital_status, dob):
    cursor.execute(
-      'INSERT INTO users (hpassword, martial_status) values(?,?),',
+      'INSERT INTO users (hpassword, marital_status) values(?,?)',
       (password, marital_status))
    cursor.execute(
-     'INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)'
+     'INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)',
       (fname, lname, email, dob))
    return True
 
 def authenticate(cursor, email, password):
     cursor.execute(
-      'SELECT * FROM users JOIN profile ON profile.user_id=users.user_id \
+      'SELECT * FROM users JOIN profile_info ON profile_info.user_id=users.user_id \
        WHERE email = ? AND hpassword = ? LIMIT 1',
       (email, password))
     user = cursor.fetchone()
@@ -29,8 +29,8 @@ def authenticate(cursor, email, password):
 
 def get_user_profile(cursor, user_id):
     cursor.execute(
-        'SELECT * FROM profile_info WHERE profile.user_id = ?',
-        (user_id))
+        'SELECT * FROM profile_info WHERE user_id = ?',
+        (user_id, ))
     user = cursor.fetchone()
     if user:
       return user
@@ -154,10 +154,8 @@ def get_all_profile_public_posts(cursor, user_id):
         ON creates_post.user_id = users.user_id \
         JOIN post \
         ON post.post_id = creates_post.post_id \
-        JOIN profile \
-        ON profile.user_id = users.user_id \
-        JOIN profile_info \
-        ON profile.email = profile_info.email \
+        JOIN profile_info AS p1 \
+        ON p1.user_id = users.user_id \
         WHERE users.user_id = ? \
         UNION \
         SELECT friend_owner as user_id, title, text_body, fname \
@@ -165,10 +163,8 @@ def get_all_profile_public_posts(cursor, user_id):
         ON friend_of.friend_owner = creates_post.user_id \
         JOIN post \
         ON post.post_id = creates_post.post_id \
-        JOIN profile \
-        ON profile.user_id = friend_of.friend_owner \
-        JOIN profile_info \
-        ON profile.email = profile_info.email \
+        JOIN profile_info AS p2 \
+        ON p2.user_id = friend_of.friend_owner \
         WHERE friend_of.friend = ?;', (user_id, user_id)
         )
     posts = cursor.fetchall()

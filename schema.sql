@@ -213,21 +213,21 @@ CREATE TABLE IF NOT EXISTS create_content (
 insert into create_content values(1,1,1,NOW());
 insert into create_content values(2,2,2,NOW());
 
-DELIMITER $$
-  CREATE PROCEDURE add_friend(IN friend_owner_id varchar(40), IN friend_id varchar(40))
-  BEGIN
-  INSERT INTO friend_of VALUES (friend_owner_id, friend_id, category);
-  END; $$
-DELIMITER ;
+--DELIMITER $$
+--  CREATE PROCEDURE add_friend(IN friend_owner_id varchar(40), IN friend_id varchar(40))
+--  BEGIN
+--  INSERT INTO friend_of VALUES (friend_owner_id, friend_id, category);
+--  END; $$
+--DELIMITER ;
 
-DELIMITER $$
-  CREATE PROCEDURE create_group(IN owner_id varchar(40), IN group_name varchar(40))
-  BEGIN
-  START TRANSACTION;
-    INSERT INTO groups (group_id, group_name) 
-      values(owner_id, group_name);
-    INSERT INTO create_group (group_id, user_id, date_created) 
-      values(owner_id, owner_id, NOW());
-  COMMIT;
-  END; $$
-DELIMITER ;
+--DELIMITER $$
+--  CREATE PROCEDURE create_group(IN owner_id varchar(40), IN group_name varchar(40))
+--  BEGIN
+--  START TRANSACTION;
+--    INSERT INTO groups (group_id, group_name) 
+--      values(owner_id, group_name);
+--    INSERT INTO create_group (group_id, user_id, date_created) 
+--      values(owner_id, owner_id, NOW());
+--  COMMIT;
+--  END; $$
+--DELIMITER ;

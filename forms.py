@@ -20,7 +20,6 @@ class AddFriendForm(Form):
     category = SelectField(u'Category', choices=[('Relative','Relative'),
                                                  ('School','School'),
                                                  ('Work','Work')])
-<<<<<<< HEAD
 class SignupForm(Form):
      fname = TextField(u'Firstname', validators=[validators.Required()])
      lname = TextField(u'Lastname', validators=[validators.Required()])

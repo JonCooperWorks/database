@@ -75,8 +75,9 @@ def signup():
 
     if request.method == 'POST' and form.validate():
         cursor = db.conn.cursor(oursql.DictCursor)
-        user = db.signup(cursor, form.fname, form.lname,
-                         form.email, form.password, form.mar_stat, form.dob)
+        user = db.signup(cursor, form.fname.data, form.lname.data,
+                         form.email.data, form.password.data,
+                         form.mar_stat.data, form.dob.data)
 
         return redirect(url_for('login'))
 
