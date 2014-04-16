@@ -7,7 +7,9 @@ This file creates your application.
 """
 
 import os
-from flask import Flask, render_template
+
+from flask import Flask, render_template, request, redirect, url_for
+import werkzeug
 
 app = Flask(__name__)
 
@@ -51,6 +53,16 @@ def about():
     """Render the website's about page."""
     return render_template('about.html')
 
+
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    if file:
+        filename = werkzeug.secure_filename(file.filename)
+        file.save(os.path.join(os.path.join(os.getcwd(), 'uploads'), filename))
+        return redirect(url_for('profile_page', filename=filename))
+
+    return 500
 
 ###
 # The functions below should be applicable to all Flask apps.
