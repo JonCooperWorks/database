@@ -21,3 +21,8 @@ INSERT INTO create_group (user_id,group_id,date_created) values (?,LAST(group.gr
 -- join a group
 
 INSERT INTO add_to_group (user_id,group_id,date_added) values (?,?,NOW());
+
+-- create group post
+
+INSERT INTO group_post (title,gpost_type,g_image_path,text_body) values(?,?,?,?),
+INSERT INTO create_content (user_id,group_id,gpost_id,date_created) values(?,?,?,NOW());
