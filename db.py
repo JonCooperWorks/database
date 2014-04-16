@@ -19,9 +19,12 @@ def authenticate(cursor, email, password):
       return user
 
 def get_user_profile(cursor, user_id):
-    return cursor.execute(
+    cursor.execute(
         'SELECT * FROM profile WHERE profile.user_id = ?',
         (user_id))
+    user = cursor.fetchone()
+    if user:
+      return user
 
 def populate(cursor):
     return exec_sql_file(cursor, 'schema.sql')

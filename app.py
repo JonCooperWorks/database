@@ -8,7 +8,8 @@ This file creates your application.
 
 import os
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, \
+     escape
 import oursql
 import werkzeug
 
@@ -38,8 +39,9 @@ def home():
                                    form=form,
                                    error='Invalid login')
 
-        session['email'] = form.email.data
-        return render_template('profile_page.haml', user=user)
+        session['user_id'] = user['user_id']
+        return redirect(url_for('profile_page'))
+
     return render_template('login.haml')
 
 @app.route('/signup')
@@ -56,7 +58,10 @@ def group_panel():
 
 @app.route('/profile_page')
 def profile_page():
-    return render_template('profile_page.haml')
+    if 'user_id' in session:
+        cursor = db.conn.cursor(oursql.DictCursor)
+        user = db.get_user_profile(cursor,escape(session['user_id']))
+    return render_template('profile_page.haml', user=user)
 
 @app.route('/admin')
 def admin_page():
