@@ -93,3 +93,32 @@ def add_friend(friend_owner_id, friend_id, category):
 def remove_friend(friend_owner_id, friend_id):
     return cursor.execute('DELETE FROM friend_of WHERE friend_owner = ? \
                           AND friend = ?', (friend_owner_id, friend_id))
+
+def get_all_profile_public_posts(cursor, user_id):
+    cursor.execute(
+       'SELECT  users.user_id, title, text_body, fname \
+        FROM users JOIN creates_post \
+        ON creates_post.user_id = users.user_id \
+        JOIN post \
+        ON post.post_id = creates_post.post_id \
+        JOIN profile \
+        ON profile.user_id = users.user_id \
+        JOIN profile_info \
+        ON profile.email = profile_info.email \
+        WHERE users.user_id = ? \
+        UNION \
+        SELECT friend_owner as user_id, title, text_body, fname \
+        FROM friend_of JOIN creates_post \
+        ON friend_of.friend_owner = creates_post.user_id \
+        JOIN post \
+        ON post.post_id = creates_post.post_id \
+        JOIN profile \
+        ON profile.user_id = friend_of.friend_owner \
+        JOIN profile_info \
+        ON profile.email = profile_info.email \
+        WHERE friend_of.friend = ?;', (user_id, user_id)
+        )
+    posts = cursor.fetchall()
+    if posts:
+      print posts
+      return posts
