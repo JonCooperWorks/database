@@ -178,7 +178,7 @@ def get_all_group_posts(cursor, group_id):
         FROM users JOIN create_content \
         ON create_content.user_id = users.user_id \
         JOIN group_post \
-        ON group_post.gpost_id = create_content.post_id \
+        ON group_post.gpost_id = create_content.gpost_id \
         JOIN profile_info AS p1 \
         ON p1.user_id = users.user_id \
         WHERE create_content.group_id = ? ',(group_id)
