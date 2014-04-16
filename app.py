@@ -89,6 +89,12 @@ def signup():
 def edit_profile():
     return render_template('edit_profile.haml')
 
+@login_required
+@app.route('/group_posts')
+def group_posts():
+    return render_template('group_posts.haml')
+
+
 @app.route('/group_panel')
 @login_required
 def group_panel():
