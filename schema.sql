@@ -38,7 +38,7 @@ insert into comments values(1, 'Comment text about some title.');
 insert into comments values(2, 'Comment text about a title.');
 
 CREATE TABLE IF NOT EXISTS groups (
-  groups_id integer not null,
+  groups_id integer not null auto_increment,
   group_name varchar(140),
   PRIMARY KEY(groups_id)
 );
