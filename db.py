@@ -110,16 +110,23 @@ def add_content_editor(cursor, user_id, email):
     from datetime import date
     user_added = get_id_by_email(cursor,email)
     user_added = user_added['user_id']
-    cursor.execute('INSERT INTO add_editors_group VALUES (?,?,?);',
+    cursor.execute('INSERT INTO add_editors_group  VALUES (?,?,?);',
       (user_id, user_added, str(date.today())))
     return True
 
-def add_group_member(cursor, user_id,email):
+def get_group_id_by_email(cursor, group_name):
+    cursor.execute('select * from groups where group_name = \'%s\'' % group_name)
+    group_id = cursor.fetchone()
+    if group_id:
+      print group_id
+      return group_id
+
+def join_group(cursor, user_id, group_name):
     from datetime import date
-    user_added = get_id_by_email(cursor,email)
-    user_added = user_added['user_id']
-    cursor.execute('INSERT INTO add_editors_group VALUES (?,?,?);',
-      (user_id, user_added, str(date.today())))
+    group_name = get_group_id_by_email(cursor, group_name)
+    group_name = group_name['group_id']
+    cursor.execute('INSERT INTO add_to_group VALUES (?,?,?);',
+      (user_id, group_name, str(date.today())))
     return True
 
 def add_friend(cursor, friend_owner_id, friend_id, category):

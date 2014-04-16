@@ -27,5 +27,5 @@ class CreateGroupForm(Form):
 class AddContentEditor(Form):
     email = TextField(u'Email', validators=[validators.Required()])
 
-class AddGroupMember(Form):
-    email = TextField(u'Email', validators=[validators.Required()])
+class JoinGroup(Form):
+    group_name = TextField(u'Group_name', validators=[validators.Required()])
