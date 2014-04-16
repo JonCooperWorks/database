@@ -29,5 +29,3 @@ class SignupForm(Form):
                                                        ('Widowed', 'Widowed')])
      email = TextField(u'email', validators=[validators.Required()])
      password = PasswordField(u'Password', validators=[validators.Required()])
-     
- 

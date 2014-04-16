@@ -14,7 +14,7 @@ import oursql
 import werkzeug
 
 import db
-from forms import LoginForm, AddFriendForm
+from forms import LoginForm, AddFriendForm, SignupForm
 
 app = Flask(__name__)
 
@@ -50,14 +50,14 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm(request.form)
 
-    if form.validate():
+    if request.method == 'POST' and form.validate():
         cursor = db.conn.cursor(oursql.DictCursor)
-        user = db.signup(cursor, form.fname, form.lname, form.mar_stat,
-                         form.email, form.password)
+        user = db.signup(cursor, form.fname, form.lname,
+                         form.email, form.password, form.mar_stat, form.dob)
 
         return redirect(url_for('login'))
 
@@ -77,7 +77,7 @@ def profile_page():
     if 'user_id' in session:
         cursor = db.conn.cursor(oursql.DictCursor)
         user = db.get_user_profile(cursor, escape(session['user_id']))
-        posts = db.get_all_profile_public_posts(cursor, 
+        posts = db.get_all_profile_public_posts(cursor,
                                                 escape(session['user_id']))
     return render_template('profile_page.haml', user=user, posts=posts)
 

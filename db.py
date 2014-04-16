@@ -12,8 +12,8 @@ conn = oursql.connect(
 def signup(cursor,fname, lname, email, password, marital_status, dob):
    cursor.execute(
       'INSERT INTO users (hpassword, martial_status) values(?,?),',
-      (password, marital_status)
-      
+      (password, marital_status))
+   cursor.execute(
      'INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)'
       (fname, lname, email, dob))
    return True
