@@ -6,6 +6,7 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
+from functools import wraps
 import os
 
 from flask import Flask, render_template, request, redirect, url_for, session, \
@@ -24,12 +25,29 @@ app.config['SECRET_KEY'] = os.environ.get(
 app.jinja_env.add_extension('pyhaml_jinja.HamlExtension')
 
 
+def login_required(f):
+    @wraps(f)
+    def decorated_view(*args, **kwargs):
+        user_id = session.get('user_id')
+        if user_id is None or db.get_user_profile(db.conn.cursor(oursql.DictCursor), user_id) is None:
+            return redirect(url_for('login'))
+
+        return f(*args, **kwargs)
+    return decorated_view
+
+
 ###
 # Routing for your application.
 ###
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/')
+@login_required
 def home():
+    return profile_page()
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     form = LoginForm(request.form)
 
     if form.validate():
@@ -46,6 +64,7 @@ def home():
     return render_template('login.haml')
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
@@ -54,23 +73,28 @@ def logout():
 def signup():
     return render_template('signup.haml')
 
+
+@login_required
 @app.route('/edit_profile')
 def edit_profile():
     return render_template('edit_profile.haml')
 
 @app.route('/group_panel')
+@login_required
 def group_panel():
     return render_template('group_panel.haml')
 
+@login_required
 @app.route('/profile_page')
 def profile_page():
     if 'user_id' in session:
         cursor = db.conn.cursor(oursql.DictCursor)
         user = db.get_user_profile(cursor, escape(session['user_id']))
-        posts = db.get_all_profile_public_posts(cursor, 
+        posts = db.get_all_profile_public_posts(cursor,
                                                 escape(session['user_id']))
     return render_template('profile_page.haml', user=user, posts=posts)
 
+@login_required
 @app.route('/add_friend', methods=['POST'])
 def add_friend():
     form = AddFriendForm(request.form)
@@ -117,6 +141,7 @@ def about():
 
 
 @app.route('/upload_file', methods=['POST'])
+@login_required
 def upload_file():
     file = request.files['file']
     if file:

@@ -99,8 +99,9 @@ def get_admin_report_gposts(cursor):
       return report
 
 def get_id_by_email(cursor, email):
-    query = 'SELECT user_id FROM profile WHERE profile.email = \'%s\';' % email
-    cursor.execute(query)
+    cursor.execute(
+        'SELECT user_id FROM profile WHERE profile.email = ?;',
+        (email))
     user = cursor.fetchone()
     if user:
       return user
