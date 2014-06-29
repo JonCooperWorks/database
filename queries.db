@@ -1,14 +1,28 @@
 -- edit_profile.haml
 
-SELECT profile_pic FROM profile WHERE user_id =?
+SELECT profile_pic FROM profile WHERE user_id =?;
 
 -- group_panel.haml
 
-INSERT INTO add_editors_group (group_owner,user_added) values(?,?)
+INSERT INTO add_editors_group (group_owner,user_added) values(?,?);
 
 -- signup.haml. profile_info needs to be linked to something. Your call what.
 --              Either users.user_id OR profile.user_id.
 
 INSERT INTO users (hpassword, martial_status) values(?,?),
 INSERT INTO profile (user_id, email) values(LAST(users.user_id), ?),
-INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?)
+INSERT INTO profile_info (fname,lname,email,dob) values(?,?,?,?);
+
+-- create a new group
+
+INSERT INTO groups (group_name) values(?),
+INSERT INTO create_group (user_id,group_id,date_created) values (?,LAST(group.group_id),NOW());
+
+-- join a group
+
+INSERT INTO add_to_group (user_id,group_id,date_added) values (?,?,NOW());
+
+-- create group post
+
+INSERT INTO group_post (title,gpost_type,g_image_path,text_body) values(?,?,?,?),
+INSERT INTO create_content (user_id,group_id,gpost_id,date_created) values(?,?,?,NOW());
